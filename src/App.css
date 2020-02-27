@@ -3,31 +3,36 @@
 
 .gallery {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     width: calc(100% - 40px);
-    height: 500px;
     padding: 20px;
     background-color: #CCCCCC;
 }
 
-.preview {
+.preview-block {
     width: 50%;
-    height: 60%;
+}
+
+.preview {
 }
 
 .preview-image {
+    display: block;
     width: 100%;
 }
 
 .thumbnails-block {
-    width: 50%;
-    height: 40%;
-    background-color: dimgray;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.thumbnail {
+.thumbnail-item {
     width: 25%;
+}
+
+.buttons-block {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
 }
 
 .description-block {

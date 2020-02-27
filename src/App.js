@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Button } from "./components/Button/Button";
 
 const data = [
     {
@@ -68,30 +69,52 @@ class App extends React.PureComponent {
         }
     };
     
+    handleLeftButtonClick = () => {
+        let selectedImage = this.state.selectedImage - 1;
+        if (selectedImage < 0) {
+            // selectedImage = 0;
+            selectedImage = data.length - 1;
+        }
+        this.setState({selectedImage});
+    };
+    
+    handleRightButtonClick = () => {
+        let selectedImage = this.state.selectedImage + 1;
+        if (selectedImage > data.length - 1) {
+            // selectedImage = data.length - 1;
+            selectedImage = 0;
+        }
+        this.setState({selectedImage});
+    };
+    
     render() {
         return (
             <div className="App">
                 <h1>Thumbnail gallery</h1>
                 <div className="gallery">
-                    <div className="preview">
+                    <div className="preview-block">
                         {/* eslint-disable jsx-a11y/img-redundant-alt */}
                         <img className="preview-image" src={data[this.state.selectedImage].image}
                              alt={`Photo by ${data[this.state.selectedImage].author}`}/>
-                    </div>
-                    <div className="thumbnails-block">
-                        {data.map((entry, index) => {
-                            return (
-                                <img
-                                    className="thumbnail"
-                                    key={`thumbnail-${entry.author}`}
-                                    src={entry.image}
-                                    alt={`Photo by ${entry.author}`}
-                                    onClick={() => this.setState({
-                                        selectedImage: index
-                                    })}
-                                />
-                            );
-                        })}
+                        <div className="thumbnails-block">
+                            {data.map((entry, index) => {
+                                return (
+                                    <img
+                                        className="thumbnail-item"
+                                        key={`thumbnail-${entry.author}`}
+                                        src={entry.image}
+                                        alt={`Photo by ${entry.author}`}
+                                        onClick={() => this.setState({
+                                            selectedImage: index
+                                        })}
+                                    />
+                                );
+                            })}
+                        </div>
+                        <div className="buttons-block">
+                            <Button onClick={this.handleLeftButtonClick}>Left</Button>
+                            <Button onClick={this.handleRightButtonClick}>Right</Button>
+                        </div>
                     </div>
                     <div className="description-block">
                         <div className="author">{data[this.state.selectedImage].author}</div>
